@@ -1,2 +1,123 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Log in
+</button>
+
+<script>
+
+$(document).ready(function(){
+    $('.sign-in-button').removeAttr('data-disable-with');
+    $('.sign-in-button').click(function(){
+		var button = $(this);
+
+		if ( button.attr("data-dismiss") != "modal" ){
+			var inputs = $('form input');
+			var title = $('.modal-title');
+			var progress = $('.progress');
+			var progressBar = $('.progress-bar');
+
+      progress.show();
+
+			progressBar.animate({width : "100%"}, 100);
+
+			progress.delay(1000)
+					.fadeOut(600);
+
+      <% if @user %>
+
+			inputs.attr("disabled", "disabled");
+
+			button.hide();
+
+			button.text("Close")
+					.removeClass("btn-primary")
+					.addClass("btn-success")
+    				.blur()
+					.delay(1600)
+					.fadeIn(function(){
+						title.text("Login successful");
+						button.attr("data-dismiss", "modal");
+					});
+
+          <% else %>
+
+          title.text("Login failed");
+          button.removeAttr("disabled");
+          <% end %>
+		}
+	});
+
+	$('#myModal').on('hidden.bs.modal', function (e) {
+		var inputs = $('form input');
+		var title = $('.modal-title');
+		var progressBar = $('.progress-bar');
+		var button = $('.modal-footer button');
+
+		inputs.removeAttr("disabled");
+
+		title.text("Log in");
+
+		progressBar.css({ "width" : "0%" });
+
+		button.removeClass("btn-success")
+				.addClass("btn-primary")
+				.text("Ok")
+				.removeAttr("data-dismiss");
+
+	});
+});
+
+
+</script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#login">Login</a></li>
+        <li><a data-toggle="tab" href="#forgottenpassword">Forgotten Password</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="login" class="tab-pane fade in active">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">Log in</h4>
+          </div> <!-- /.modal-header -->
+
+          <div class="modal-body">
+            <%= form_for(:session, url: login_path) do |form| %>
+            <div class="form-group">
+              <div class="input-group">
+                <%= form.label :email, class: "input-group-addon glyphicon glyphicon-user"%>
+                <%= form.email_field :email, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <%= form.label :password, class: "input-group-addon glyphicon glyphicon-lock"%>
+                <%= form.password_field :password, class: "form-control" %>
+              </div>
+            </div>
+            <%= form.submit "Login", class: "form-control btn btn-primary sign-in-button" %>
+            <% end %>
+          </div>
+        </div>
+        <div id="forgottenpassword" class="tab-pane fade">
+          <p>Forgotten password stuff here </p>
+        </div>
+        <!--  <div class="checkbox">
+        <label>
+        <input type="checkbox"> Remember me
+      </label>
+    </div> -->
+  </div>
+  <div class="modal-footer">
+    <div class="progress">
+      <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
+        <span class="sr-only">progress</span>
+      </div>
+    </div>
+  </div> <!-- /.modal-footer -->
+
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
