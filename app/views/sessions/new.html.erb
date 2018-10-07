@@ -1,69 +1,11 @@
 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  Log in
+  Login
 </button>
 
 <script>
 
 $(document).ready(function(){
-    $('.sign-in-button').removeAttr('data-disable-with');
-    $('.sign-in-button').click(function(){
-		var button = $(this);
-
-		if ( button.attr("data-dismiss") != "modal" ){
-			var inputs = $('form input');
-			var title = $('.modal-title');
-			var progress = $('.progress');
-			var progressBar = $('.progress-bar');
-
-      progress.show();
-
-			progressBar.animate({width : "100%"}, 100);
-
-			progress.delay(1000)
-					.fadeOut(600);
-
-      <% if @user %>
-
-			inputs.attr("disabled", "disabled");
-
-			button.hide();
-
-			button.text("Close")
-					.removeClass("btn-primary")
-					.addClass("btn-success")
-    				.blur()
-					.delay(1600)
-					.fadeIn(function(){
-						title.text("Login successful");
-						button.attr("data-dismiss", "modal");
-					});
-
-          <% else %>
-
-          title.text("Login failed");
-          button.removeAttr("disabled");
-          <% end %>
-		}
-	});
-
-	$('#myModal').on('hidden.bs.modal', function (e) {
-		var inputs = $('form input');
-		var title = $('.modal-title');
-		var progressBar = $('.progress-bar');
-		var button = $('.modal-footer button');
-
-		inputs.removeAttr("disabled");
-
-		title.text("Log in");
-
-		progressBar.css({ "width" : "0%" });
-
-		button.removeClass("btn-success")
-				.addClass("btn-primary")
-				.text("Ok")
-				.removeAttr("data-dismiss");
-
-	});
+  $('.sign-in-button').removeAttr('data-disable-with');
 });
 
 
@@ -96,6 +38,12 @@ $(document).ready(function(){
                 <%= form.label :password, class: "input-group-addon glyphicon glyphicon-lock"%>
                 <%= form.password_field :password, class: "form-control" %>
               </div>
+            </div>
+            <div class="checkbox">
+              <%= form.label :remember_me, class: "checkbox inline" do %>
+              <%= form.check_box :remember_me %>
+              <span>Remember me on this computer</span>
+              <% end %>
             </div>
             <%= form.submit "Login", class: "form-control btn btn-primary sign-in-button" %>
             <% end %>

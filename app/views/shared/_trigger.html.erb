@@ -1,0 +1,27 @@
+<script>
+console.log("hi");
+  var button = $('.sign-in-button');
+
+    var inputs = $('form input');
+    var title = $('.modal-title');
+    var progress = $('.progress');
+    var progressBar = $('.progress-bar');
+    progress.show();
+    progressBar.css("width", "0%");
+
+    <% if logged_in? %>
+      inputs.attr("disabled", "disabled");
+      button.attr("disabled", "disabled");
+      progressBar.css("background-color", "blue");
+      progressBar.animate({width : "100%"}, 100);
+
+    <% else %>
+      progressBar.css("background-color", "red");
+      progressBar.animate({width : "100%"}, 100);
+      title.text("Login failed");
+      button.removeAttr("disabled");
+    <% end %>
+    progress.delay(1000)
+    .fadeOut(600);
+
+</script>
