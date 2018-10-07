@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to root_url
     end
-    render partial: 'shared/trigger'
+    respond_to do |format|
+      format.js
+    end
   end
   def destroy
     logout if logged_in?

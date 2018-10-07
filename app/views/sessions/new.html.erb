@@ -26,7 +26,7 @@ $(document).ready(function(){
           </div> <!-- /.modal-header -->
 
           <div class="modal-body">
-            <%= form_for(:session, url: login_path) do |form| %>
+            <%= form_for(:session, url: login_path, remote: true) do |form| %>
             <div class="form-group">
               <div class="input-group">
                 <%= form.label :email, class: "input-group-addon glyphicon glyphicon-user"%>
