@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  credit: 
+  debit: 
+  user_id: 1
+  category_id: 1
+  source: MyString
+
+two:
+  credit: 
+  debit: 
+  user_id: 1
+  category_id: 1
+  source: MyString

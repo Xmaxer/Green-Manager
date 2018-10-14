@@ -1,0 +1,6 @@
+Transaction_Record_ID
+Credit
+Debit
+user_id
+category_id
+source
