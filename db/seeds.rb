@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+user = User.find(1)
+50.times do
+  debit = Faker::Number.decimal(2,2)
+  credit = Faker::Number.decimal(2,2)
+  source = Faker::Lorem.sentence(1)
+  user.transactions.build(debit: debit, credit: credit, source: source).save
+end
